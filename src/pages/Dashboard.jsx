@@ -20,9 +20,6 @@ export default function Dashboard() {
   const [hasil, setHasil] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // =========================
-  // HANDLE INPUT
-  // =========================
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -32,9 +29,6 @@ export default function Dashboard() {
     });
   };
 
-  // =========================
-  // DECISION TREE
-  // =========================
   const decisionTree = () => {
     const freq = parseInt(form.frekuensi);
 
@@ -49,9 +43,6 @@ export default function Dashboard() {
     return label;
   };
 
-  // =========================
-  // CLASSIFY + INSERT DB
-  // =========================
   const classify = async () => {
     if (
       !form.nama ||
@@ -110,9 +101,6 @@ export default function Dashboard() {
     }
   };
 
-  // =========================
-  // RESET
-  // =========================
   const resetForm = () => {
     setForm({
       nama: "",
@@ -134,11 +122,10 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#0d0f1a] text-white">
-      {/* HEADER */}
       <header className="border-b border-[#2a2f4a] bg-[#141726] sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto h-16 flex items-center justify-between px-6">
+        <div className="max-w-7xl mx-auto min-h-[70px] flex flex-col md:flex-row md:items-center justify-between px-4 md:px-6 py-3 gap-3">
           <div>
-            <h1 className="text-2xl font-black text-blue-400">
+            <h1 className="text-lg md:text-2xl font-black text-blue-400 leading-tight">
               Survei Kegiatan Mahasiswa di Kantin
             </h1>
 
@@ -149,18 +136,13 @@ export default function Dashboard() {
             <button className="px-4 py-2 rounded-xl bg-[#1c2035]">
               Dashboard
             </button>
-
-            <button className="px-4 py-2 rounded-xl bg-[#1c2035]">
-              Dataset
-            </button>
           </div>
         </div>
       </header>
 
-      {/* HERO */}
-      <section className="max-w-7xl mx-auto px-6 pt-14">
-        <div className="bg-gradient-to-br from-[#141726] to-[#1b1f35] border border-[#2a2f4a] rounded-3xl p-10">
-          <h1 className="text-5xl font-black leading-tight">
+      <section className="max-w-7xl mx-auto px-4 md:px-6 pt-8 md:pt-14">
+        <div className="bg-gradient-to-br from-[#141726] to-[#1b1f35] border border-[#2a2f4a] rounded-3xl p-5 md:p-10">
+          <h1 className="text-3xl md:text-5xl font-black leading-tight">
             Sistem Klasifikasi
             <br />
             Kegiatan Mahasiswa
@@ -170,7 +152,7 @@ export default function Dashboard() {
             Sistem klasifikasi kegiatan mahasiswa berbasis Decision Tree
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mt-8">
             <div className="bg-[#1c2035] rounded-2xl p-5 border border-[#2a2f4a]">
               <h2 className="text-3xl font-black text-blue-400">3</h2>
               <p className="text-sm text-gray-400">Cluster</p>
@@ -194,15 +176,13 @@ export default function Dashboard() {
         </div>
       </section>
 
-      {/* FORM */}
-      <section className="max-w-7xl mx-auto px-6 py-10">
-        <div className="bg-[#141726] border border-[#2a2f4a] rounded-3xl p-8">
-          <h2 className="text-2xl font-bold mb-8">
+      <section className="max-w-7xl mx-auto px-4 md:px-6 py-6 md:py-10">
+        <div className="bg-[#141726] border border-[#2a2f4a] rounded-3xl p-4 md:p-8">
+          <h2 className="text-xl md:text-2xl font-bold mb-6 md:mb-8">
             📝 Form Klasifikasi Mahasiswa
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {/* NAMA */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="text-sm text-gray-400 mb-2 block">
                 Nama Lengkap
@@ -214,11 +194,10 @@ export default function Dashboard() {
                 value={form.nama}
                 onChange={handleChange}
                 placeholder="Masukkan nama..."
-                className="w-full bg-[#1c2035] border border-[#2a2f4a] rounded-xl px-4 py-3"
+                className="w-full bg-[#1c2035] border border-[#2a2f4a] rounded-xl px-4 py-3 text-sm md:text-base"
               />
             </div>
 
-            {/* PRODI */}
             <div>
               <label className="text-sm text-gray-400 mb-2 block">
                 Program Studi
@@ -247,7 +226,6 @@ export default function Dashboard() {
               </select>
             </div>
 
-            {/* GENERASI */}
             <div>
               <label className="text-sm text-gray-400 mb-2 block">
                 Generasi
@@ -268,7 +246,6 @@ export default function Dashboard() {
               </select>
             </div>
 
-            {/* USIA */}
             <div>
               <label className="text-sm text-gray-400 mb-2 block">Usia</label>
 
@@ -285,7 +262,6 @@ export default function Dashboard() {
               </select>
             </div>
 
-            {/* FREKUENSI */}
             <div>
               <label className="text-sm text-gray-400 mb-2 block">
                 Frekuensi ke Kantin
@@ -306,7 +282,6 @@ export default function Dashboard() {
               </select>
             </div>
 
-            {/* WAKTU */}
             <div>
               <label className="text-sm text-gray-400 mb-2 block">
                 Waktu di Kantin
@@ -326,7 +301,6 @@ export default function Dashboard() {
               </select>
             </div>
 
-            {/* TUJUAN */}
             <div className="md:col-span-2">
               <label className="text-sm text-gray-400 mb-2 block">
                 Tujuan Utama
@@ -348,13 +322,12 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* CHECKBOX */}
           <div className="mt-8">
             <label className="text-sm text-gray-400 block mb-4">
               Aktivitas di Kantin
             </label>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {[
                 { key: "makanminum", label: "Makan/Minum" },
                 { key: "ngobrol", label: "Mengobrol dengan Teman" },
@@ -364,7 +337,7 @@ export default function Dashboard() {
               ].map((item) => (
                 <label
                   key={item.key}
-                  className="flex items-center gap-2 bg-[#1c2035] border border-[#2a2f4a] px-4 py-3 rounded-xl"
+                  className="flex items-center gap-2 bg-[#1c2035] border border-[#2a2f4a] px-3 py-3 rounded-xl text-sm"
                 >
                   <input
                     type="checkbox"
@@ -379,12 +352,11 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* BUTTON */}
-          <div className="flex gap-4 mt-10">
+          <div className="flex flex-col sm:flex-row gap-4 mt-10">
             <button
               onClick={classify}
               disabled={loading}
-              className="px-7 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 font-bold"
+              className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 font-bold"
             >
               {loading ? "Loading..." : "🔍 Klasifikasikan"}
             </button>
@@ -397,10 +369,11 @@ export default function Dashboard() {
             </button>
           </div>
 
-          {/* HASIL */}
           {hasil && (
             <div className="mt-10 p-6 rounded-2xl border border-green-500 bg-green-500/10">
-              <h2 className="text-3xl font-black text-green-400">{hasil}</h2>
+              <h2 className="text-2xl md:text-3xl font-black text-green-400">
+                {hasil}
+              </h2>
 
               <p className="text-gray-300 mt-3">
                 Sistem berhasil melakukan klasifikasi berdasarkan data perilaku
@@ -411,7 +384,7 @@ export default function Dashboard() {
         </div>
       </section>
       {notif && (
-        <div className="fixed bottom-5 right-5 bg-[#141726] border border-green-500 text-green-400 px-5 py-3 rounded-xl shadow-xl">
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 md:left-auto md:right-5 md:translate-x-0 bg-[#141726] border border-green-500 text-green-400 px-5 py-3 rounded-xl shadow-xl">
           {notif}
         </div>
       )}
