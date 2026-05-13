@@ -91,33 +91,7 @@ export default function Dashboard() {
       setNotif("❌ Gagal simpan data");
     } else {
       setNotif("✅ Data berhasil disimpan!");
-
-      resetForm();
-
-      setHasil(null);
-      setTimeout(() => {
-        setNotif("");
-      }, 3000);
     }
-  };
-
-  const resetForm = () => {
-    setForm({
-      nama: "",
-      prodi: "",
-      generasi: "",
-      usia: "",
-      frekuensi: "",
-      waktu: "",
-      tujuan: "",
-      makanminum: false,
-      ngobrol: false,
-      tugas: false,
-      hp: false,
-      game: false,
-    });
-
-    setHasil(null);
   };
 
   return (
@@ -361,10 +335,7 @@ export default function Dashboard() {
               {loading ? "Loading..." : "🔍 Klasifikasikan"}
             </button>
 
-            <button
-              onClick={resetForm}
-              className="px-7 py-3 rounded-xl bg-[#1c2035] border border-[#2a2f4a]"
-            >
+            <button className="px-7 py-3 rounded-xl bg-[#1c2035] border border-[#2a2f4a]">
               Reset
             </button>
           </div>
