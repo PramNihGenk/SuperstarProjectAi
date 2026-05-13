@@ -4,7 +4,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const handleLogin = () => {
-    navigate("/survei");
+    navigate("/dashboard");
   };
   
 
