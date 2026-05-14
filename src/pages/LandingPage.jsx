@@ -325,7 +325,7 @@ export default function LandingPage() {
 
           <div className="slide-in-right delay-300 relative flex justify-center mt-16 lg:mt-0">
             <div className="absolute w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-blue-500/20 rounded-full blur-[100px] md:blur-[140px] glow-pulse" />
-            <div className="shimmer-border relative w-full max-w-md backdrop-blur-2xl bg-white/5 border border-white/10 rounded-[32px] p-6 md:p-8 shadow-2xl animate-[float_6s_ease-in-out_infinite] overflow-hidden">
+            <div className="relative w-full max-w-md backdrop-blur-2xl bg-white/5 border border-white/10 rounded-[32px] p-6 md:p-8 shadow-2xl animate-[float_6s_ease-in-out_infinite] overflow-hidden">
               <div className="scan-line" />
 
               <div className="flex items-center justify-between">
