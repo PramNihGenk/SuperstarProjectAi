@@ -197,9 +197,9 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          <div className="table-scroll w-full">
-            <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.02] p-4 sm:p-6 overflow-hidden">
-              <table className="w-full min-w-[950px] border-separate border-spacing-y-3 text-left">
+          <div className="table-scroll w-full overflow-x-auto pb-2">
+            <div className="mt-8 rounded-3xl border border-white/10 bg-white/[0.02] p-4 sm:p-6 overflow-x-auto">
+              <table className="min-w-[1100px] w-full border-separate border-spacing-y-3 text-left">
                 <thead>
                   <tr className="text-gray-400 text-sm uppercase tracking-wider">
                     <th className="pb-4 px-6 font-semibold">Nama</th>
