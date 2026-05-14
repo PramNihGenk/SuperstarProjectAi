@@ -105,7 +105,6 @@ export default function Dashboard() {
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
-            {/* SEMUA */}
             <button
               onClick={() => setSelectedCluster("Semua")}
               className={`
@@ -127,8 +126,6 @@ export default function Dashboard() {
 
               <p className="text-gray-400 mt-2">Total Responden</p>
             </button>
-
-            {/* KASUAL */}
             <button
               onClick={() => setSelectedCluster("Pengunjung Kasual")}
               className={`
@@ -150,8 +147,6 @@ export default function Dashboard() {
 
               <p className="text-gray-400 mt-2">Pengunjung Kasual</p>
             </button>
-
-            {/* SESEKALI */}
             <button
               onClick={() => setSelectedCluster("Pengunjung Sesekali")}
               className={`
@@ -173,8 +168,6 @@ export default function Dashboard() {
 
               <p className="text-gray-400 mt-2">Pengunjung Sesekali</p>
             </button>
-
-            {/* AKTIF */}
             <button
               onClick={() => setSelectedCluster("Pengunjung Aktif Sosial")}
               className={`
@@ -254,32 +247,21 @@ export default function Dashboard() {
     duration-300
   "
                       >
-                        {/* NAMA */}
                         <td className="px-6 py-5 text-white align-middle">
                           {item.nama || "-"}
                         </td>
-
-                        {/* PRODI */}
                         <td className="px-6 py-5 text-white align-middle">
                           {item.prodi || "-"}
                         </td>
-
-                        {/* FREKUENSI */}
                         <td className="px-6 py-5 text-white align-middle">
                           {item.frekuensi || "-"}
                         </td>
-
-                        {/* TUJUAN */}
                         <td className="px-6 py-5 text-white align-middle">
                           {item.tujuan || "-"}
                         </td>
-
-                        {/* AKTIVITAS */}
                         <td className="px-6 py-5 text-white align-middle">
                           {item.aktivitas || "-"}
                         </td>
-
-                        {/* CLUSTER */}
                         <td className="py-4">
                           <span
                             className="

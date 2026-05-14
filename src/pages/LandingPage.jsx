@@ -64,40 +64,20 @@ export default function LandingPage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-[#060816] text-white">
-      {/* BACKGROUND */}
       <div className="absolute inset-0">
         <div className="absolute top-[-120px] left-[-120px] w-[420px] h-[420px] bg-blue-500/20 rounded-full blur-[140px]" />
-
         <div className="absolute bottom-[-150px] right-[-100px] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[140px]" />
-
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px]" />
       </div>
 
-      {/* NAVBAR */}
       <header className="relative z-50 max-w-7xl mx-auto px-6 pt-8">
         <div className="flex items-center justify-between">
-          {/* LEFT */}
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-full px-5 py-2.5 shadow-lg">
             <h1 className="font-semibold tracking-wide text-sm md:text-base text-white/90">
               AI Project Group 1
             </h1>
           </div>
-
-          {/* RIGHT LOGOS */}
-          <div
-            className="
-        flex
-        items-center
-        gap-4
-        backdrop-blur-xl
-        bg-white/5
-        border
-        border-white/10
-        rounded-full
-        px-5
-        py-2
-      "
-          >
+          <div className="flex items-center gap-4 backdrop-blur-xl bg-white/5 border border-white/10 rounded-full px-5 py-2">
             <img
               src={logo1}
               alt="logo1"
@@ -125,10 +105,8 @@ export default function LandingPage() {
         </div>
       </header>
 
-      {/* HERO */}
       <section className="relative z-10 max-w-7xl mx-auto px-6 min-h-screen flex items-center">
         <div className="grid lg:grid-cols-2 gap-20 items-center w-full">
-          {/* LEFT */}
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm mb-8 backdrop-blur-xl">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
@@ -152,22 +130,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row gap-5 mt-12">
               <button
                 onClick={() => setOpenForm(true)}
-                className="
-                  group
-                  relative
-                  overflow-hidden
-                  px-8
-                  py-4
-                  rounded-2xl
-                  bg-gradient-to-r
-                  from-blue-500
-                  to-purple-500
-                  font-bold
-                  shadow-2xl
-                  shadow-blue-500/20
-                  hover:scale-[1.03]
-                  duration-300
-                "
+                className="group relative overflow-hidden px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 font-bold shadow-2xl shadow-blue-500/20 hover:scale-[1.03] duration-300 "
               >
                 <span className="relative z-10">Isi Form Survei</span>
 
@@ -176,50 +139,30 @@ export default function LandingPage() {
 
               <button
                 onClick={() => navigate("/dashboard")}
-                className="
-                  px-8
-                  py-4
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/5
-                  backdrop-blur-xl
-                  hover:bg-white/10
-                  duration-300
-                "
+                className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 duration-300"
               >
                 Lihat Statistik
               </button>
             </div>
 
-            {/* MINI STATS */}
             <div className="flex flex-wrap gap-8 mt-16">
               <div>
                 <h2 className="text-3xl font-black text-blue-400">AI</h2>
-
                 <p className="text-gray-500 text-sm mt-1">Decision Tree</p>
               </div>
-
               <div>
                 <h2 className="text-3xl font-black text-purple-400">PCR</h2>
-
                 <p className="text-gray-500 text-sm mt-1">Student Research</p>
               </div>
-
               <div>
                 <h2 className="text-3xl font-black text-green-400">Smart</h2>
-
                 <p className="text-gray-500 text-sm mt-1">Classification</p>
               </div>
             </div>
           </div>
 
-          {/* RIGHT */}
           <div className="relative hidden lg:flex justify-center">
-            {/* GLOW */}
             <div className="absolute w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[140px]" />
-
-            {/* MAIN CARD */}
             <div
               className="
                 relative
@@ -235,7 +178,6 @@ export default function LandingPage() {
                 animate-[float_6s_ease-in-out_infinite]
               "
             >
-              {/* TOP */}
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-400 text-sm">AI Analytics</p>
@@ -248,7 +190,6 @@ export default function LandingPage() {
                 </div>
               </div>
 
-              {/* CHART MOCKUP */}
               <div className="mt-10 space-y-5">
                 {[
                   {
@@ -286,7 +227,6 @@ export default function LandingPage() {
           </div>
         </div>
       </section>
-      {/* FORM MODAL */}
       {openForm && (
         <div
           className="
@@ -302,7 +242,6 @@ export default function LandingPage() {
       animate-fadeIn
     "
         >
-          {/* MODAL BOX */}
           <div
             className="
         relative
@@ -318,7 +257,6 @@ export default function LandingPage() {
         animate-[modalUp_.3s_ease]
       "
           >
-            {/* CLOSE BUTTON */}
             <button
               onClick={() => setOpenForm(false)}
               className="

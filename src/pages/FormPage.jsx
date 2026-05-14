@@ -99,7 +99,6 @@ export default function FormPage() {
 
   return (
     <div className="relative text-white">
-      {/* BACKGROUND GLOW */}
       <div className="absolute inset-0 overflow-hidden rounded-[32px]">
         <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[120px]" />
 
@@ -107,7 +106,6 @@ export default function FormPage() {
       </div>
 
       <div className="relative z-10 p-8 md:p-10">
-        {/* HEADER */}
         <div className="flex items-start justify-between gap-5 mb-10">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm mb-5">
@@ -129,7 +127,6 @@ export default function FormPage() {
           </div>
         </div>
 
-        {/* FORM */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div className="space-y-2">
             <label className="text-sm text-gray-400">Nama Responden</label>
@@ -184,7 +181,16 @@ export default function FormPage() {
               <option value="">-- Pilih Prodi --</option>
               <option>Teknik Informatika</option>
               <option>Sistem Informasi</option>
+              <option>Teknik Rekayasa Komputer</option>
+              <option>Teknik Rekayasa Sistem Eletronika</option>
+              <option>Teknik Rekayasa Jaringan Telekomunikasi</option>
+              <option>Teknologi Rekayasa Mekatronika</option>
+              <option>Teknik Mesin</option>
+              <option>Teknik Listrik</option>
+              <option>Teknik Eletronika</option>
+              <option>Akutansi Perpajakan</option>
               <option>Bisnis Digital</option>
+              <option>Hubungan Masyarakat dan Komunikasi Digital</option>
             </select>
           </div>
 
@@ -311,7 +317,6 @@ export default function FormPage() {
           </div>
         </div>
 
-        {/* BUTTON */}
         <div className="flex flex-col sm:flex-row gap-4 mt-10">
           <button
             onClick={classify}
@@ -352,7 +357,6 @@ export default function FormPage() {
           </button>
         </div>
 
-        {/* RESULT */}
         {hasil && (
           <div
             className="
@@ -379,7 +383,6 @@ export default function FormPage() {
         )}
       </div>
 
-      {/* NOTIF */}
       {notif && (
         <div
           className="
