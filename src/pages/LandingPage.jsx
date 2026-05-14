@@ -63,57 +63,79 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#060816] text-white">
+    <div className="relative min-h-screen overflow-x-hidden bg-[#060816] text-white">
       <div className="absolute inset-0">
         <div className="absolute top-[-120px] left-[-120px] w-[420px] h-[420px] bg-blue-500/20 rounded-full blur-[140px]" />
         <div className="absolute bottom-[-150px] right-[-100px] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[140px]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:70px_70px]" />
       </div>
 
-      <header className="relative z-50 max-w-7xl mx-auto px-6 pt-8">
-        <div className="flex items-center justify-between">
+      <header className="relative z-50 max-w-7xl mx-auto px-4 md:px-6 pt-5 md:pt-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          {/* TITLE */}
           <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-full px-5 py-2.5 shadow-lg">
-            <h1 className="font-semibold tracking-wide text-sm md:text-base text-white/90">
+            <h1 className="font-semibold tracking-wide text-sm md:text-base text-white/90 text-center">
               AI Project Group 1
             </h1>
           </div>
-          <div className="flex items-center gap-4 backdrop-blur-xl bg-white/5 border border-white/10 rounded-full px-5 py-2">
+
+          {/* LOGOS */}
+          <div
+            className="
+        flex
+        flex-wrap
+        justify-center
+        items-center
+        gap-3
+        md:gap-4
+        backdrop-blur-xl
+        bg-white/5
+        border
+        border-white/10
+        rounded-full
+        px-4
+        md:px-5
+        py-2
+        w-full
+        md:w-auto
+      "
+          >
             <img
               src={logo1}
               alt="logo1"
-              className="h-8 object-contain opacity-80"
+              className="h-7 md:h-8 object-contain opacity-80"
             />
 
             <img
               src={logo2}
               alt="logo2"
-              className="h-9 scale-175 object-contain opacity-80"
+              className="h-8 md:h-9 scale-125 md:scale-150 object-contain opacity-80"
             />
 
             <img
               src={logo3}
               alt="logo3"
-              className="h-8 object-contain opacity-80"
+              className="h-7 md:h-8 object-contain opacity-80"
             />
 
             <img
               src={logo4}
               alt="logo4"
-              className="h-8 object-contain opacity-80"
+              className="h-7 md:h-8 object-contain opacity-80"
             />
           </div>
         </div>
       </header>
 
-      <section className="relative z-10 max-w-7xl mx-auto px-6 min-h-screen flex items-center">
-        <div className="grid lg:grid-cols-2 gap-20 items-center w-full">
+      <section className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-14 md:min-h-screen flex items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center w-full">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm mb-8 backdrop-blur-xl">
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
               Decision Tree Analytics
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-black leading-[0.95] tracking-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1] tracking-tight">
               Sistem
               <span className="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 Klasifikasi
@@ -127,10 +149,10 @@ export default function LandingPage() {
               kantin kampus.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 mt-12">
+            <div className="flex flex-col sm:flex-row gap-4 mt-10">
               <button
                 onClick={() => setOpenForm(true)}
-                className="group relative overflow-hidden px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 font-bold shadow-2xl shadow-blue-500/20 hover:scale-[1.03] duration-300 "
+                className="w-full sm:w-auto group relative overflow-hidden px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 to-purple-500 font-bold shadow-2xl shadow-blue-500/20 hover:scale-[1.03] duration-300 "
               >
                 <span className="relative z-10">Isi Form Survei</span>
 
@@ -139,7 +161,7 @@ export default function LandingPage() {
 
               <button
                 onClick={() => navigate("/dashboard")}
-                className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 duration-300"
+                className="w-full sm:w-auto px-8 py-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl hover:bg-white/10 duration-300"
               >
                 Lihat Statistik
               </button>
@@ -236,36 +258,37 @@ export default function LandingPage() {
       flex
       items-center
       justify-center
-      bg-black/60
+      bg-black/70
       backdrop-blur-md
-      p-4
-      animate-fadeIn
+      p-2
+      md:p-4
     "
         >
           <div
             className="
         relative
         w-full
-        max-w-5xl
-        max-h-[90vh]
+        h-full
+        md:h-auto
+        md:max-w-5xl
+        md:max-h-[90vh]
         overflow-y-auto
-        rounded-3xl
+        rounded-none
+        md:rounded-3xl
         border
         border-white/10
         bg-[#0f172a]
         shadow-2xl
-        animate-[modalUp_.3s_ease]
       "
           >
             <button
               onClick={() => setOpenForm(false)}
               className="
-          sticky
+          fixed
+          md:absolute
           top-4
-          left-full
+          right-4
           z-50
-          mr-4
-          mt-4
           flex
           h-10
           w-10

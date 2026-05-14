@@ -105,7 +105,7 @@ export default function FormPage() {
         <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="relative z-10 p-8 md:p-10">
+      <div className="relative z-10 p-5 md:p-10">
         <div className="flex items-start justify-between gap-5 mb-10">
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm mb-5">
@@ -127,7 +127,7 @@ export default function FormPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
           <div className="space-y-2">
             <label className="text-sm text-gray-400">Nama Responden</label>
 
