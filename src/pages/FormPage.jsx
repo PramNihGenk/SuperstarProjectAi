@@ -261,6 +261,146 @@ export default function FormPage() {
             </select>
           </div>
         </div>
+        {/* AKTIVITAS */}
+        <div className="mt-10">
+          <label className="text-sm text-gray-400 block mb-4">
+            Aktivitas di Kantin
+          </label>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {/* NGOBROL */}
+            <label
+              className="
+        flex
+        items-center
+        gap-3
+        bg-[#141726]
+        border
+        border-white/10
+        rounded-2xl
+        px-5
+        py-4
+        cursor-pointer
+        hover:border-blue-500/40
+        hover:bg-white/[0.03]
+        duration-300
+      "
+            >
+              <input
+                type="checkbox"
+                name="ngobrol"
+                checked={form.ngobrol}
+                onChange={handleChange}
+                className="
+          w-5
+          h-5
+          accent-blue-500
+        "
+              />
+
+              <span className="text-white">Mengobrol</span>
+            </label>
+
+            {/* TUGAS */}
+            <label
+              className="
+        flex
+        items-center
+        gap-3
+        bg-[#141726]
+        border
+        border-white/10
+        rounded-2xl
+        px-5
+        py-4
+        cursor-pointer
+        hover:border-purple-500/40
+        hover:bg-white/[0.03]
+        duration-300
+      "
+            >
+              <input
+                type="checkbox"
+                name="tugas"
+                checked={form.tugas}
+                onChange={handleChange}
+                className="
+          w-5
+          h-5
+          accent-purple-500
+        "
+              />
+
+              <span className="text-white">Mengerjakan Tugas</span>
+            </label>
+
+            {/* HP */}
+            <label
+              className="
+        flex
+        items-center
+        gap-3
+        bg-[#141726]
+        border
+        border-white/10
+        rounded-2xl
+        px-5
+        py-4
+        cursor-pointer
+        hover:border-cyan-500/40
+        hover:bg-white/[0.03]
+        duration-300
+      "
+            >
+              <input
+                type="checkbox"
+                name="hp"
+                checked={form.hp}
+                onChange={handleChange}
+                className="
+          w-5
+          h-5
+          accent-cyan-500
+        "
+              />
+
+              <span className="text-white">Main HP</span>
+            </label>
+
+            {/* GAME */}
+            <label
+              className="
+        flex
+        items-center
+        gap-3
+        bg-[#141726]
+        border
+        border-white/10
+        rounded-2xl
+        px-5
+        py-4
+        cursor-pointer
+        hover:border-pink-500/40
+        hover:bg-white/[0.03]
+        duration-300
+      "
+            >
+              <input
+                type="checkbox"
+                name="game"
+                checked={form.game}
+                onChange={handleChange}
+                className="
+          w-5
+          h-5
+          accent-pink-500
+        "
+              />
+
+              <span className="text-white">Main Game</span>
+            </label>
+          </div>
+        </div>
 
         <div className="flex flex-col sm:flex-row gap-4 mt-10">
           <button
