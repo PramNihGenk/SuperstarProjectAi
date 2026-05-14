@@ -56,7 +56,7 @@ export default function FormPage() {
       !form.waktu ||
       !form.tujuan
     ) {
-      alert("Lengkapi semua field dulu brok 💀");
+      alert("Lengkapi semua field terlebih dahulu!");
       return;
     }
 
@@ -159,26 +159,15 @@ export default function FormPage() {
             <label className="text-sm text-gray-400">Program Studi</label>
 
             <select
+              required
               name="prodi"
               value={form.prodi}
               onChange={handleChange}
-              className="
-    w-full
-    bg-[#141726]
-    text-white
-    border
-    border-white/10
-    rounded-2xl
-    px-5
-    py-4
-    outline-none
-    focus:border-blue-500
-    focus:ring-4
-    focus:ring-blue-500/20
-    duration-300
-  "
+              className="w-full bg-[#141726] text-white border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 duration-300"
             >
-              <option value="">-- Pilih Prodi --</option>
+              <option value="" disabled hidden>
+                -- Pilih Prodi --
+              </option>
               <option>Teknik Informatika</option>
               <option>Sistem Informasi</option>
               <option>Teknik Rekayasa Komputer</option>
@@ -198,26 +187,15 @@ export default function FormPage() {
             <label className="text-sm text-gray-400">Generasi</label>
 
             <select
+              required
               name="generasi"
               value={form.generasi}
               onChange={handleChange}
-              className="
-              w-full
-    bg-[#141726]
-    text-white
-    border
-    border-white/10
-    rounded-2xl
-    px-5
-    py-4
-    outline-none
-    focus:border-blue-500
-    focus:ring-4
-    focus:ring-blue-500/20
-    duration-300
-            "
+              className="w-full bg-[#141726] text-white border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 duration-300"
             >
-              <option value="">-- Pilih Generasi --</option>
+              <option value="" disabled hidden>
+                -- Pilih Generasi --
+              </option>
               <option>22</option>
               <option>23</option>
               <option>24</option>
@@ -229,26 +207,15 @@ export default function FormPage() {
             <label className="text-sm text-gray-400">Usia</label>
 
             <select
+              required
               name="usia"
               value={form.usia}
               onChange={handleChange}
-              className="
-              w-full
-    bg-[#141726]
-    text-white
-    border
-    border-white/10
-    rounded-2xl
-    px-5
-    py-4
-    outline-none
-    focus:border-blue-500
-    focus:ring-4
-    focus:ring-blue-500/20
-    duration-300
-            "
+              className="w-full bg-[#141726] text-white border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 duration-300"
             >
-              <option value="">-- Pilih Usia --</option>
+              <option value="" disabled hidden>
+                -- Pilih Usia --
+              </option>
               <option>17-19</option>
               <option>20-22</option>
               <option>22 Keatas</option>
@@ -259,26 +226,15 @@ export default function FormPage() {
             <label className="text-sm text-gray-400">Frekuensi ke Kantin</label>
 
             <select
+              required
               name="frekuensi"
               value={form.frekuensi}
               onChange={handleChange}
-              className="
-              w-full
-    bg-[#141726]
-    text-white
-    border
-    border-white/10
-    rounded-2xl
-    px-5
-    py-4
-    outline-none
-    focus:border-blue-500
-    focus:ring-4
-    focus:ring-blue-500/20
-    duration-300
-            "
+              className="w-full bg-[#141726] text-white border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 duration-300"
             >
-              <option value="">-- Pilih --</option>
+              <option value="" disabled hidden>
+                -- Pilih --
+              </option>
               <option value="1">Jarang</option>
               <option value="2">1-2x Seminggu</option>
               <option value="3">3-5x Seminggu</option>
@@ -290,26 +246,15 @@ export default function FormPage() {
             <label className="text-sm text-gray-400">Waktu di Kantin</label>
 
             <select
+              required
               name="waktu"
               value={form.waktu}
               onChange={handleChange}
-              className="
-              w-full
-    bg-[#141726]
-    text-white
-    border
-    border-white/10
-    rounded-2xl
-    px-5
-    py-4
-    outline-none
-    focus:border-blue-500
-    focus:ring-4
-    focus:ring-blue-500/20
-    duration-300
-            "
+              className="w-full bg-[#141726] text-white border border-white/10 rounded-2xl px-5 py-4 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 duration-300"
             >
-              <option value="">-- Pilih --</option>
+              <option value="" disabled hidden>
+                -- Pilih --
+              </option>
               <option>Pagi</option>
               <option>Siang</option>
               <option>Sore</option>
