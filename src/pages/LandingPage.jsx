@@ -8,7 +8,6 @@ import logo3 from "../assets/Logo-IDEAL.png";
 import logo4 from "../assets/Logo-Unggul.png";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-/* ---------- Animated counter (rAF-based, minimal re-renders) ---------- */
 function useCountUp(target, duration = 1200) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -18,7 +17,6 @@ function useCountUp(target, duration = 1200) {
     const animate = (ts) => {
       if (!startTime) startTime = ts;
       const progress = Math.min((ts - startTime) / duration, 1);
-      // easeOutQuart
       const eased = 1 - Math.pow(1 - progress, 4);
       setCount(Math.round(eased * target));
       if (progress < 1) raf = requestAnimationFrame(animate);
@@ -29,7 +27,6 @@ function useCountUp(target, duration = 1200) {
   return count;
 }
 
-/* ---------- Particle ---------- */
 const PARTICLES = [
   {
     w: 6,
@@ -119,7 +116,6 @@ export default function LandingPage() {
   const kasualCount = useCountUp(stats.kasualPercent);
   const sesekaliCount = useCountUp(stats.sesekaliPercent);
 
-  /* trigger entrance animations after mount */
   useEffect(() => {
     const t = setTimeout(() => setVisible(true), 60);
     return () => clearTimeout(t);

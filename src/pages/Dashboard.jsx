@@ -357,7 +357,6 @@ export default function Dashboard() {
                 </h2>
                 <p className="text-gray-400 mt-2 text-sm">{key}</p>
 
-                {/* Progress bar */}
                 <div className="mt-3 h-1 w-full bg-white/5 rounded-full overflow-hidden">
                   <div
                     className="h-full rounded-full transition-all duration-1000"
@@ -377,7 +376,6 @@ export default function Dashboard() {
           })}
         </div>
 
-        {/* ── Table section ── */}
         <div className="fade-up delay-500 backdrop-blur-xl bg-white/[0.02] border border-white/10 rounded-3xl p-5 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
             <div>
@@ -403,7 +401,6 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Table */}
           <div className="table-scroll w-full overflow-x-auto pb-2">
             <table className="min-w-[1100px] w-full border-separate border-spacing-y-2 text-left">
               <thead>
@@ -472,7 +469,6 @@ export default function Dashboard() {
             </table>
           </div>
 
-          {/* Pagination */}
           <div className="flex items-center justify-center gap-3 mt-8 flex-wrap">
             <button
               onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
@@ -482,7 +478,6 @@ export default function Dashboard() {
               ← Prev
             </button>
 
-            {/* Page numbers */}
             {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => {
               const page = i + 1;
               return (
