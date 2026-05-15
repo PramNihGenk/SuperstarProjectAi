@@ -8,22 +8,23 @@ import logo3 from "../assets/Logo-IDEAL.png";
 import logo4 from "../assets/Logo-Unggul.png";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
-/* ---------- Animated counter ---------- */
+/* ---------- Animated counter (rAF-based, minimal re-renders) ---------- */
 function useCountUp(target, duration = 1200) {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (target === 0) {
-      setCount(0);
-      return;
-    }
-    let start = 0;
-    const step = Math.ceil(duration / target);
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start >= target) clearInterval(timer);
-    }, step);
-    return () => clearInterval(timer);
+    if (target === 0) { setCount(0); return; }
+    let startTime = null;
+    let raf;
+    const animate = (ts) => {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      // easeOutQuart
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setCount(Math.round(eased * target));
+      if (progress < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
   }, [target, duration]);
   return count;
 }

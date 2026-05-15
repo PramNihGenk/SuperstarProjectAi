@@ -325,6 +325,8 @@ body {
   animation: particleFloat var(--duration, 8s) ease-in-out infinite;
   animation-delay: var(--delay, 0s);
   pointer-events: none;
+  will-change: transform, opacity;
+  contain: layout style;
 }
 
 @keyframes particleFloat {

@@ -127,18 +127,19 @@ function toPercents(counts, total) {
 function useCountUp(target, duration = 900) {
   const [val, setVal] = useState(0);
   useEffect(() => {
-    if (target === 0) {
-      setVal(0);
-      return;
-    }
-    let cur = 0;
-    const step = Math.max(1, Math.ceil(duration / target));
-    const t = setInterval(() => {
-      cur += 1;
-      setVal(cur);
-      if (cur >= target) clearInterval(t);
-    }, step);
-    return () => clearInterval(t);
+    if (target === 0) { setVal(0); return; }
+    let startTime = null;
+    let raf;
+    const animate = (ts) => {
+      if (!startTime) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      // easeOutQuart
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setVal(Math.round(eased * target));
+      if (progress < 1) raf = requestAnimationFrame(animate);
+    };
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
   }, [target, duration]);
   return val;
 }
