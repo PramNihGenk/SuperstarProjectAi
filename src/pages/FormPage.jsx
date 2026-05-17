@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useRef } from "react";
 import { supabase } from "../lib/supabase";
 
+/* ─── helpers ───────────────────────────────────────────────── */
 function FieldGroup({ label, delay, children }) {
   return (
     <div className={`fade-up ${delay} space-y-2`}>
@@ -38,30 +38,12 @@ function CheckCard({ name, label, checked, onChange, accent, icon }) {
   );
 }
 
-const RESULT_CONFIG = {
-  "Pengunjung Aktif Sosial": {
-    emoji: "🏆", color: "text-purple-300",
-    border: "border-purple-500/40", bg: "bg-purple-500/10",
-    glow: "shadow-purple-500/20",
-    desc: "Kamu sangat aktif di kantin kampus — senang bersosialisasi dan sering menghabiskan waktu bersama teman-teman!",
-  },
-  "Pengunjung Kasual": {
-    emoji: "☕", color: "text-blue-300",
-    border: "border-blue-500/40", bg: "bg-blue-500/10",
-    glow: "shadow-blue-500/20",
-    desc: "Kamu mengunjungi kantin secukupnya, biasanya untuk makan atau istirahat sejenak.",
-  },
-  "Pengunjung Sesekali": {
-    emoji: "🌙", color: "text-yellow-300",
-    border: "border-yellow-500/40", bg: "bg-yellow-500/10",
-    glow: "shadow-yellow-500/20",
-    desc: "Kamu jarang ke kantin kampus — mungkin lebih suka tempat lain atau membawa bekal sendiri.",
-  },
-};
-
-export default function FormPage() {
-  const navigate = useNavigate();
-
+/* ─── Main ──────────────────────────────────────────────────── */
+/**
+ * onSuccess(label, formData) — dipanggil setelah insert berhasil
+ *   → LandingPage akan tutup popup form & buka popup hasil
+ */
+export default function FormPage({ onSuccess }) {
   const [form, setForm] = useState({
     nama: "", prodi: "", generasi: "", usia: "",
     frekuensi: "", waktu: "", tujuan: "",
@@ -69,12 +51,12 @@ export default function FormPage() {
   });
 
   const [notif,   setNotif]   = useState("");
-  const [hasil,   setHasil]   = useState(null);
   const [loading, setLoading] = useState(false);
+  const isSubmitting = useRef(false); // hard guard anti-spam
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   };
 
   const decisionTree = () => {
@@ -85,6 +67,9 @@ export default function FormPage() {
   };
 
   const classify = async () => {
+    // Hard guard — blok klik selama proses berlangsung
+    if (isSubmitting.current) return;
+
     if (!form.nama || !form.prodi || !form.generasi || !form.usia ||
         !form.frekuensi || !form.waktu || !form.tujuan) {
       setNotif("⚠️ Lengkapi semua field terlebih dahulu!");
@@ -92,9 +77,11 @@ export default function FormPage() {
       return;
     }
 
+    // Kunci sebelum operasi apapun
+    isSubmitting.current = true;
     setLoading(true);
+
     const label = decisionTree();
-    setHasil(null); // reset untuk re-trigger animasi
 
     const aktivitas = [];
     if (form.ngobrol) aktivitas.push("Mengobrol");
@@ -111,20 +98,22 @@ export default function FormPage() {
     setLoading(false);
 
     if (error) {
-      console.log(error);
-      setNotif("❌ Gagal simpan data");
-    } else {
-      setTimeout(() => setHasil(label), 50); // tiny delay to re-trigger animation
-      setNotif("✅ Data berhasil disimpan!");
+      // Buka kunci hanya jika error agar user bisa coba lagi
+      isSubmitting.current = false;
+      console.error(error);
+      setNotif("❌ Gagal simpan data, coba lagi.");
       setTimeout(() => setNotif(""), 3000);
+    } else {
+      // Berhasil — panggil callback ke LandingPage
+      // isSubmitting tetap true supaya tidak bisa submit ulang
+      onSuccess?.(label, form);
     }
   };
-
-  const resultCfg = hasil ? RESULT_CONFIG[hasil] ?? RESULT_CONFIG["Pengunjung Kasual"] : null;
 
   return (
     <div className="relative text-white w-full max-w-4xl mx-auto">
 
+      {/* decorative blobs */}
       <div className="absolute inset-0 overflow-hidden rounded-[32px] pointer-events-none">
         <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[120px]" />
@@ -132,6 +121,7 @@ export default function FormPage() {
 
       <div className="relative z-10 p-5 md:p-10">
 
+        {/* header */}
         <div className="fade-up mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm mb-5">
             <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
@@ -150,6 +140,7 @@ export default function FormPage() {
             aktivitas mahasiswa di kantin kampus.
           </p>
 
+          {/* progress bar */}
           <div className="mt-6 h-1 w-full bg-white/5 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-500"
@@ -166,6 +157,7 @@ export default function FormPage() {
           </p>
         </div>
 
+        {/* form fields */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
           <FieldGroup label="Nama Responden" delay="delay-100">
@@ -232,10 +224,10 @@ export default function FormPage() {
             </select>
           </FieldGroup>
 
-          <FieldGroup label="Tujuan ke Kantin" delay="delay-700" >
+          <FieldGroup label="Tujuan ke Kantin" delay="delay-700">
             <select name="tujuan" value={form.tujuan} onChange={handleChange} className={`${inputCls} lg:col-span-2`}>
               <option value="" disabled hidden>-- Pilih --</option>
-              <option>Makan & Minum</option>
+              <option>Makan &amp; Minum</option>
               <option>Belajar / Mengerjakan Tugas</option>
               <option>Bersantai</option>
               <option>Bertemu Teman</option>
@@ -244,6 +236,7 @@ export default function FormPage() {
 
         </div>
 
+        {/* checkboxes */}
         <div className="fade-up delay-800 mt-10">
           <label className="text-sm text-gray-400 font-medium tracking-wide block mb-4">
             Aktivitas di Kantin
@@ -258,7 +251,8 @@ export default function FormPage() {
           </div>
         </div>
 
-        <div className="fade-up delay-800 flex flex-col sm:flex-row gap-4 mt-10">
+        {/* submit */}
+        <div className="fade-up delay-800 mt-10">
           <button
             onClick={classify}
             disabled={loading}
@@ -278,51 +272,11 @@ export default function FormPage() {
               )}
             </span>
           </button>
-
-          <button
-            onClick={() => navigate("/")}
-            className="px-8 py-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 duration-300 hover:scale-[1.02]"
-          >
-            ← Kembali
-          </button>
         </div>
-
-        {hasil && resultCfg && (
-          <div className={`result-reveal mt-10 p-6 md:p-8 rounded-3xl border ${resultCfg.border} ${resultCfg.bg} backdrop-blur-xl shadow-2xl ${resultCfg.glow}`}>
-            <div className="flex items-start gap-4">
-              <div className="text-5xl counter-pop">{resultCfg.emoji}</div>
-              <div className="flex-1">
-                <p className="text-sm text-gray-400 uppercase tracking-widest mb-2 font-medium">
-                  ✦ Hasil Klasifikasi
-                </p>
-                <h2 className={`text-2xl md:text-4xl font-black ${resultCfg.color} leading-tight`}>
-                  {hasil}
-                </h2>
-                <p className="text-gray-300 mt-3 leading-relaxed">
-                  {resultCfg.desc}
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-6 pt-5 border-t border-white/5">
-              <p className="text-xs text-gray-500 uppercase tracking-widest mb-3 font-medium">Berdasarkan</p>
-              <div className="flex flex-wrap gap-2">
-                {[
-                  form.frekuensi && `Frekuensi: ${["","Jarang","1-2x/minggu","3-5x/minggu","Setiap Hari"][parseInt(form.frekuensi)]}`,
-                  form.waktu     && `Waktu: ${form.waktu}`,
-                  form.tujuan    && `Tujuan: ${form.tujuan}`,
-                ].filter(Boolean).map((tag, i) => (
-                  <span key={i} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
 
       </div>
 
+      {/* toast */}
       {notif && (
         <div className="animate-fadeIn fixed bottom-10 left-1/2 -translate-x-1/2 z-[1001] bg-gray-900/90 border border-white/20 text-white px-6 py-3 rounded-full shadow-2xl backdrop-blur-md text-sm font-medium">
           {notif}

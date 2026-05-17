@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "../lib/supabase";
 import FormPage from "./FormPage";
+import ResultModal from "../components/ResultModal";
 import logo1 from "../assets/LogoPCR.png";
 import logo2 from "../assets/Logo-ITSA.png";
 import logo3 from "../assets/Logo-IDEAL.png";
@@ -110,7 +111,15 @@ export default function LandingPage() {
     sesekaliPercent: 0,
   });
   const [openForm, setOpenForm] = useState(false);
-  const [visible, setVisible] = useState(false);
+  // result = null | { label: string, form: object }
+  const [result,   setResult]   = useState(null);
+  const [visible,  setVisible]  = useState(false);
+
+  // Dipanggil FormPage saat insert berhasil
+  const handleSuccess = (label, formData) => {
+    setOpenForm(false);          // tutup popup form
+    setResult({ label, form: formData }); // buka popup hasil
+  };
 
   const aktifCount = useCountUp(stats.aktifPercent);
   const kasualCount = useCountUp(stats.kasualPercent);
@@ -159,11 +168,9 @@ export default function LandingPage() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = openForm ? "hidden" : "unset";
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [openForm]);
+    document.body.style.overflow = (openForm || result) ? "hidden" : "unset";
+    return () => { document.body.style.overflow = "unset"; };
+  }, [openForm, result]);
 
   const chartData = [
     { name: "Aktif Sosial", value: stats.aktifPercent },
@@ -424,6 +431,7 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* ── Popup Form ── */}
       {openForm && (
         <div className="overlay-enter fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md p-0 md:p-4 overflow-hidden">
           <button
@@ -435,10 +443,19 @@ export default function LandingPage() {
 
           <div className="modal-enter relative w-full h-full md:h-auto md:max-w-5xl md:max-h-[90vh] overflow-y-auto bg-[#0f172a] md:rounded-3xl border-none md:border md:border-white/10 shadow-2xl">
             <div className="p-6 md:p-10">
-              <FormPage />
+              <FormPage onSuccess={handleSuccess} />
             </div>
           </div>
         </div>
+      )}
+
+      {/* ── Popup Hasil Klasifikasi ── */}
+      {result && (
+        <ResultModal
+          hasil={result.label}
+          form={result.form}
+          onClose={() => setResult(null)}
+        />
       )}
     </div>
   );
