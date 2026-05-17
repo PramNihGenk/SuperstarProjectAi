@@ -133,7 +133,6 @@ function useCountUp(target, duration = 900) {
     const animate = (ts) => {
       if (!startTime) startTime = ts;
       const progress = Math.min((ts - startTime) / duration, 1);
-      // easeOutQuart
       const eased = 1 - Math.pow(1 - progress, 4);
       setVal(Math.round(eased * target));
       if (progress < 1) raf = requestAnimationFrame(animate);

@@ -28,14 +28,12 @@ export default function ResultModal({ hasil, form, onClose }) {
   const cfg = RESULT_CONFIG[hasil] ?? RESULT_CONFIG["Pengunjung Kasual"];
   const freqLabel = ["", "Jarang", "1-2x/minggu", "3-5x/minggu", "Setiap Hari"][parseInt(form.frekuensi)] ?? "-";
 
-  // Close on Escape
   useEffect(() => {
     const handler = (e) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = "hidden";
     return () => { document.body.style.overflow = "unset"; };
@@ -46,33 +44,28 @@ export default function ResultModal({ hasil, form, onClose }) {
       className="fixed inset-0 z-[3000] flex items-center justify-center p-4"
       style={{ animation: "fadeInBackdrop 0.3s ease forwards" }}
     >
-      {/* Backdrop — click to close */}
       <div
         className="absolute inset-0 bg-black/75 backdrop-blur-md"
         onClick={onClose}
       />
 
-      {/* Card */}
       <div
         className="relative z-10 w-full max-w-lg"
         style={{ animation: "modalSlideUp 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards" }}
       >
-        {/* glow blob */}
         <div className={`absolute -inset-6 rounded-[48px] blur-3xl opacity-40 ${cfg.glowBlur}`} />
 
         <div className={`relative rounded-3xl border ${cfg.border} bg-[#0a0f1e]/95 backdrop-blur-xl shadow-2xl ${cfg.glow} overflow-hidden`}>
-          {/* top gradient bar */}
+
           <div className={`h-1.5 w-full bg-gradient-to-r ${cfg.gradientFrom} ${cfg.gradientTo}`} />
 
           <div className="p-8">
-            {/* badge */}
             <div className="mb-6">
               <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r ${cfg.gradientFrom} ${cfg.gradientTo} text-white text-xs font-bold uppercase tracking-widest shadow-lg`}>
                 <span>✦</span> Hasil Klasifikasi
               </div>
             </div>
 
-            {/* emoji + label */}
             <div className="flex items-center gap-5 mb-6">
               <div className="text-6xl" style={{ animation: "bounceIn 0.6s 0.2s both" }}>
                 {cfg.emoji}
@@ -85,12 +78,10 @@ export default function ResultModal({ hasil, form, onClose }) {
               </div>
             </div>
 
-            {/* description */}
             <p className="text-gray-300 leading-relaxed mb-6 text-sm md:text-base border-l-2 border-white/10 pl-4">
               {cfg.desc}
             </p>
 
-            {/* detail grid */}
             <div className="rounded-2xl bg-white/[0.03] border border-white/5 p-4 mb-6">
               <p className="text-xs text-gray-500 uppercase tracking-widest mb-3 font-medium">Detail Responden</p>
               <div className="grid grid-cols-2 gap-2">
@@ -111,7 +102,6 @@ export default function ResultModal({ hasil, form, onClose }) {
               </div>
             </div>
 
-            {/* back button */}
             <button
               onClick={onClose}
               className={`w-full py-4 rounded-2xl bg-gradient-to-r ${cfg.gradientFrom} ${cfg.gradientTo} font-bold text-white shadow-xl hover:scale-[1.02] hover:shadow-2xl transition-all duration-300`}

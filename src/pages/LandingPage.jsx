@@ -111,14 +111,12 @@ export default function LandingPage() {
     sesekaliPercent: 0,
   });
   const [openForm, setOpenForm] = useState(false);
-  // result = null | { label: string, form: object }
   const [result,   setResult]   = useState(null);
   const [visible,  setVisible]  = useState(false);
 
-  // Dipanggil FormPage saat insert berhasil
   const handleSuccess = (label, formData) => {
-    setOpenForm(false);          // tutup popup form
-    setResult({ label, form: formData }); // buka popup hasil
+    setOpenForm(false);
+    setResult({ label, form: formData });
   };
 
   const aktifCount = useCountUp(stats.aktifPercent);
@@ -144,7 +142,6 @@ export default function LandingPage() {
       (i) => i.label === "Pengunjung Aktif Sosial",
     ).length;
 
-    // Largest-remainder algorithm — total selalu tepat 100%
     const counts = [aktif, kasual, sesekali];
     const floors = counts.map((c) => Math.floor((c / total) * 100));
     const remainders = counts.map((c) => ((c / total) * 100) % 1);
@@ -178,7 +175,6 @@ export default function LandingPage() {
     { name: "Sesekali", value: stats.sesekaliPercent },
   ];
 
-  // Aktif=ungu, Kasual=hijau-teal (kontras jelas), Sesekali=amber
   const COLORS = ["#8b5cf6", "#10b981", "#f59e0b"];
 
   const renderLabel = ({ cx, cy, midAngle, outerRadius, name, percent }) => {
@@ -431,7 +427,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Popup Form ── */}
       {openForm && (
         <div className="overlay-enter fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md p-0 md:p-4 overflow-hidden">
           <button
@@ -449,7 +444,6 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* ── Popup Hasil Klasifikasi ── */}
       {result && (
         <ResultModal
           hasil={result.label}

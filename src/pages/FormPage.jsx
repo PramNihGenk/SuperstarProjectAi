@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { supabase } from "../lib/supabase";
 
-/* ─── helpers ───────────────────────────────────────────────── */
 function FieldGroup({ label, delay, children }) {
   return (
     <div className={`fade-up ${delay} space-y-2`}>
@@ -38,11 +37,6 @@ function CheckCard({ name, label, checked, onChange, accent, icon }) {
   );
 }
 
-/* ─── Main ──────────────────────────────────────────────────── */
-/**
- * onSuccess(label, formData) — dipanggil setelah insert berhasil
- *   → LandingPage akan tutup popup form & buka popup hasil
- */
 export default function FormPage({ onSuccess }) {
   const [form, setForm] = useState({
     nama: "", prodi: "", generasi: "", usia: "",
@@ -52,7 +46,7 @@ export default function FormPage({ onSuccess }) {
 
   const [notif,   setNotif]   = useState("");
   const [loading, setLoading] = useState(false);
-  const isSubmitting = useRef(false); // hard guard anti-spam
+  const isSubmitting = useRef(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -67,7 +61,6 @@ export default function FormPage({ onSuccess }) {
   };
 
   const classify = async () => {
-    // Hard guard — blok klik selama proses berlangsung
     if (isSubmitting.current) return;
 
     if (!form.nama || !form.prodi || !form.generasi || !form.usia ||
@@ -77,7 +70,6 @@ export default function FormPage({ onSuccess }) {
       return;
     }
 
-    // Kunci sebelum operasi apapun
     isSubmitting.current = true;
     setLoading(true);
 
@@ -98,14 +90,11 @@ export default function FormPage({ onSuccess }) {
     setLoading(false);
 
     if (error) {
-      // Buka kunci hanya jika error agar user bisa coba lagi
       isSubmitting.current = false;
       console.error(error);
       setNotif("❌ Gagal simpan data, coba lagi.");
       setTimeout(() => setNotif(""), 3000);
     } else {
-      // Berhasil — panggil callback ke LandingPage
-      // isSubmitting tetap true supaya tidak bisa submit ulang
       onSuccess?.(label, form);
     }
   };
@@ -113,7 +102,6 @@ export default function FormPage({ onSuccess }) {
   return (
     <div className="relative text-white w-full max-w-4xl mx-auto">
 
-      {/* decorative blobs */}
       <div className="absolute inset-0 overflow-hidden rounded-[32px] pointer-events-none">
         <div className="absolute top-[-100px] left-[-100px] w-[300px] h-[300px] bg-blue-500/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-purple-500/10 rounded-full blur-[120px]" />
@@ -121,7 +109,6 @@ export default function FormPage({ onSuccess }) {
 
       <div className="relative z-10 p-5 md:p-10">
 
-        {/* header */}
         <div className="fade-up mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm mb-5">
             <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
@@ -140,7 +127,6 @@ export default function FormPage({ onSuccess }) {
             aktivitas mahasiswa di kantin kampus.
           </p>
 
-          {/* progress bar */}
           <div className="mt-6 h-1 w-full bg-white/5 rounded-full overflow-hidden">
             <div
               className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-500"
@@ -157,7 +143,6 @@ export default function FormPage({ onSuccess }) {
           </p>
         </div>
 
-        {/* form fields */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
 
           <FieldGroup label="Nama Responden" delay="delay-100">
@@ -236,7 +221,6 @@ export default function FormPage({ onSuccess }) {
 
         </div>
 
-        {/* checkboxes */}
         <div className="fade-up delay-800 mt-10">
           <label className="text-sm text-gray-400 font-medium tracking-wide block mb-4">
             Aktivitas di Kantin
@@ -251,7 +235,6 @@ export default function FormPage({ onSuccess }) {
           </div>
         </div>
 
-        {/* submit */}
         <div className="fade-up delay-800 mt-10">
           <button
             onClick={classify}
@@ -276,7 +259,6 @@ export default function FormPage({ onSuccess }) {
 
       </div>
 
-      {/* toast */}
       {notif && (
         <div className="animate-fadeIn fixed bottom-10 left-1/2 -translate-x-1/2 z-[1001] bg-gray-900/90 border border-white/20 text-white px-6 py-3 rounded-full shadow-2xl backdrop-blur-md text-sm font-medium">
           {notif}
