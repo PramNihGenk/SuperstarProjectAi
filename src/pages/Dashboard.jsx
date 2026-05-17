@@ -35,80 +35,6 @@ const CLUSTER_CONFIG = {
   },
 };
 
-const PARTICLES = [
-  {
-    top: "12%",
-    left: "5%",
-    w: 20,
-    h: 20,
-    color: "#8b5cf6",
-    dur: "7s",
-    del: "0s",
-  },
-  {
-    top: "45%",
-    left: "2%",
-    w: 14,
-    h: 14,
-    color: "#10b981",
-    dur: "9s",
-    del: "1.5s",
-  },
-  {
-    top: "75%",
-    left: "8%",
-    w: 28,
-    h: 28,
-    color: "#06b6d4",
-    dur: "11s",
-    del: "0.8s",
-  },
-  {
-    top: "18%",
-    left: "92%",
-    w: 18,
-    h: 18,
-    color: "#ec4899",
-    dur: "8s",
-    del: "2s",
-  },
-  {
-    top: "60%",
-    left: "88%",
-    w: 24,
-    h: 24,
-    color: "#3b82f6",
-    dur: "10s",
-    del: "0.4s",
-  },
-  {
-    top: "85%",
-    left: "82%",
-    w: 12,
-    h: 12,
-    color: "#a78bfa",
-    dur: "12s",
-    del: "1.2s",
-  },
-  {
-    top: "8%",
-    left: "52%",
-    w: 10,
-    h: 10,
-    color: "#22d3ee",
-    dur: "9s",
-    del: "3s",
-  },
-  {
-    top: "90%",
-    left: "48%",
-    w: 16,
-    h: 16,
-    color: "#818cf8",
-    dur: "8s",
-    del: "2.5s",
-  },
-];
 
 function toPercents(counts, total) {
   if (total === 0) return counts.map(() => 0);
@@ -240,22 +166,6 @@ export default function Dashboard() {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-500/5 rounded-full blur-[160px]" />
 
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:70px_70px]" />
-        {PARTICLES.map((p, i) => (
-          <div
-            key={i}
-            className="particle rounded-full absolute"
-            style={{
-              top: p.top,
-              left: p.left,
-              width: p.w,
-              height: p.h,
-              background: p.hex ?? p.color,
-              opacity: 0.25,
-              "--duration": p.dur,
-              "--delay": p.del,
-            }}
-          />
-        ))}
       </div>
 
       <header

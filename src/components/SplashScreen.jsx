@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 const TAGLINE = "Sistem Klasifikasi Mahasiswa";
 
 export default function SplashScreen({ onDone }) {
-  const [phase, setPhase]         = useState("enter");   // enter | hold | exit
-  const [charIdx, setCharIdx]     = useState(0);         // typewriter index
+  const [phase, setPhase]         = useState("enter");
+  const [charIdx, setCharIdx]     = useState(0);
   const [particles, setParticles] = useState([]);
   const hasFired                  = useRef(false);
 

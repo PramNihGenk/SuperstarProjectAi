@@ -12,7 +12,10 @@ import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 function useCountUp(target, duration = 1200) {
   const [count, setCount] = useState(0);
   useEffect(() => {
-    if (target === 0) { setCount(0); return; }
+    if (target === 0) {
+      setCount(0);
+      return;
+    }
     let startTime = null;
     let raf;
     const animate = (ts) => {
@@ -28,81 +31,6 @@ function useCountUp(target, duration = 1200) {
   return count;
 }
 
-const PARTICLES = [
-  {
-    w: 6,
-    h: 6,
-    top: "15%",
-    left: "8%",
-    color: "bg-blue-400/30",
-    dur: "7s",
-    del: "0s",
-  },
-  {
-    w: 4,
-    h: 4,
-    top: "40%",
-    left: "3%",
-    color: "bg-purple-400/30",
-    dur: "9s",
-    del: "1.5s",
-  },
-  {
-    w: 8,
-    h: 8,
-    top: "70%",
-    left: "12%",
-    color: "bg-cyan-400/20",
-    dur: "11s",
-    del: "0.8s",
-  },
-  {
-    w: 5,
-    h: 5,
-    top: "20%",
-    left: "90%",
-    color: "bg-pink-400/25",
-    dur: "8s",
-    del: "2s",
-  },
-  {
-    w: 7,
-    h: 7,
-    top: "55%",
-    left: "85%",
-    color: "bg-blue-300/20",
-    dur: "10s",
-    del: "0.4s",
-  },
-  {
-    w: 4,
-    h: 4,
-    top: "80%",
-    left: "80%",
-    color: "bg-purple-300/25",
-    dur: "12s",
-    del: "1.2s",
-  },
-  {
-    w: 3,
-    h: 3,
-    top: "10%",
-    left: "50%",
-    color: "bg-cyan-300/20",
-    dur: "9s",
-    del: "3s",
-  },
-  {
-    w: 5,
-    h: 5,
-    top: "88%",
-    left: "45%",
-    color: "bg-indigo-400/20",
-    dur: "8s",
-    del: "2.5s",
-  },
-];
-
 export default function LandingPage() {
   const navigate = useNavigate();
   const [stats, setStats] = useState({
@@ -111,8 +39,9 @@ export default function LandingPage() {
     sesekaliPercent: 0,
   });
   const [openForm, setOpenForm] = useState(false);
-  const [result,   setResult]   = useState(null);
-  const [visible,  setVisible]  = useState(false);
+  const [result, setResult] = useState(null);
+  const [visible, setVisible] = useState(false);
+  const [dtModal, setDtModal] = useState(false);
 
   const handleSuccess = (label, formData) => {
     setOpenForm(false);
@@ -165,9 +94,12 @@ export default function LandingPage() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = (openForm || result) ? "hidden" : "unset";
-    return () => { document.body.style.overflow = "unset"; };
-  }, [openForm, result]);
+    document.body.style.overflow =
+      openForm || result || dtModal ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [openForm, result, dtModal]);
 
   const chartData = [
     { name: "Aktif Sosial", value: stats.aktifPercent },
@@ -205,21 +137,6 @@ export default function LandingPage() {
         <div className="absolute bottom-[-150px] right-[-100px] w-[400px] h-[400px] bg-purple-500/20 rounded-full blur-[140px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-indigo-500/5 rounded-full blur-[180px]" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.025)_1px,transparent_1px)] bg-[size:70px_70px]" />
-
-        {PARTICLES.map((p, i) => (
-          <div
-            key={i}
-            className={`particle w-${p.w} h-${p.h} ${p.color} rounded-full`}
-            style={{
-              top: p.top,
-              left: p.left,
-              width: `${p.w * 4}px`,
-              height: `${p.h * 4}px`,
-              "--duration": p.dur,
-              "--delay": p.del,
-            }}
-          />
-        ))}
       </div>
 
       <header
@@ -257,12 +174,14 @@ export default function LandingPage() {
       <section className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-14 md:min-h-screen flex items-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-20 items-center w-full">
           <div>
-            <div
-              className={`fade-up delay-100 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-400 text-sm mb-8 backdrop-blur-xl`}
+            <button
+              onClick={() => setDtModal(true)}
+              className="fade-up delay-100 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-sm mb-8 backdrop-blur-xl hover:bg-blue-500/20 hover:border-blue-400/60 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20 transition-all duration-300 cursor-pointer"
             >
               <div className="w-2 h-2 bg-blue-400 rounded-full animate-pulse" />
-              Decision Tree Analytics
-            </div>
+              Implementasi Logika
+              <span className="opacity-50 text-xs">↗</span>
+            </button>
             <h1 className="fade-up delay-200 text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1] tracking-tight">
               Sistem
               <span className="block bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent gradient-animated">
@@ -299,7 +218,11 @@ export default function LandingPage() {
 
             <div className="fade-up delay-500 flex flex-wrap gap-8 mt-16">
               {[
-                { label: "Decision Tree", value: "AI", color: "text-purple-400" },
+                {
+                  label: "Decision Tree",
+                  value: "AI",
+                  color: "text-purple-400",
+                },
                 {
                   label: "Student Research",
                   value: "PCR",
@@ -450,6 +373,135 @@ export default function LandingPage() {
           form={result.form}
           onClose={() => setResult(null)}
         />
+      )}
+
+      {dtModal && (
+        <div
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md p-4"
+          onClick={(e) => e.target === e.currentTarget && setDtModal(false)}
+        >
+          <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-[#0f172a] border border-white/10 rounded-3xl shadow-2xl">
+            <button
+              onClick={() => setDtModal(false)}
+              className="absolute top-4 right-4 z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white hover:bg-red-500 hover:rotate-90 transition-all duration-300 text-sm"
+            >
+              ✕
+            </button>
+
+            <div className="p-6 md:p-10">
+              <div className="flex justify-center mb-5">
+                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/30 bg-blue-500/10 text-blue-400 text-xs font-semibold tracking-wider uppercase">
+                  <div className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-pulse" />
+                  Implementasi Logika
+                </div>
+              </div>
+
+              <h2 className="text-center text-2xl md:text-3xl font-black text-white mb-3">
+                Rule Based Decision Tree
+              </h2>
+
+              <p className="text-center text-sm leading-relaxed max-w-xl mx-auto mb-8 text-gray-400">
+                Sistem ini menerapkan aturan Decision Tree secara langsung
+                menggunakan struktur percabangan{" "}
+                <span className="text-white font-semibold">if-else</span>.
+                Setiap data mahasiswa diklasifikasikan berdasarkan satu atribut
+                utama, yaitu{" "}
+                <span className="text-blue-400 font-semibold">
+                  frekuensi kunjungan ke kantin
+                </span>{" "}
+                dalam satu minggu.
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all duration-300">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white font-black text-sm mb-3 shadow-lg shadow-blue-500/20">
+                    1
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-400">
+                    Sistem pertama memeriksa{" "}
+                    <span className="text-white font-semibold">
+                      Frekuensi Kunjungan
+                    </span>{" "}
+                    mahasiswa ke kantin per minggu.
+                  </p>
+                </div>
+
+                <div className="bg-purple-500/5 border border-purple-500/20 rounded-2xl p-5 hover:border-purple-500/40 hover:bg-purple-500/10 transition-all duration-300">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-violet-500 flex items-center justify-center text-white font-black text-sm mb-3 shadow-lg shadow-purple-500/20">
+                    2
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-400">
+                    Jika frekuensi{" "}
+                    <span className="text-white font-semibold">≤ 1</span>{" "}
+                    (Jarang), langsung mendapat label{" "}
+                    <span className="text-purple-400 font-bold">
+                      Pengunjung Sesekali
+                    </span>
+                    .
+                  </p>
+                </div>
+
+                <div className="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-5 hover:border-amber-500/40 hover:bg-amber-500/10 transition-all duration-300">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center text-white font-black text-sm mb-3 shadow-lg shadow-amber-500/20">
+                    3
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-400">
+                    Jika frekuensi{" "}
+                    <span className="text-white font-semibold">≥ 3</span>{" "}
+                    (3–5x/minggu atau setiap hari), hasilnya{" "}
+                    <span className="text-amber-400 font-bold">
+                      Pengunjung Aktif Sosial
+                    </span>
+                    .
+                  </p>
+                </div>
+
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-blue-500/30 hover:bg-white/[0.07] transition-all duration-300">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center text-white font-black text-sm mb-3 shadow-lg shadow-blue-500/20">
+                    4
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-400">
+                    Jika frekuensi{" "}
+                    <span className="text-white font-semibold">= 2</span>{" "}
+                    (1–2x/minggu), tidak memenuhi aturan 2 maupun aturan 3.
+                  </p>
+                </div>
+
+                <div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5 hover:border-emerald-500/40 hover:bg-emerald-500/10 transition-all duration-300">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center text-white font-black text-sm mb-3 shadow-lg shadow-emerald-500/20">
+                    5
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-400">
+                    Kondisi frekuensi = 2 masuk cabang{" "}
+                    <span className="text-white font-semibold">else</span>,
+                    menghasilkan label{" "}
+                    <span className="text-emerald-400 font-bold">
+                      Pengunjung Kasual
+                    </span>
+                    .
+                  </p>
+                </div>
+
+                <div className="bg-white/5 border border-white/10 rounded-2xl p-5 hover:border-cyan-500/30 hover:bg-white/[0.07] transition-all duration-300">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center text-white font-black text-sm mb-3 shadow-lg shadow-cyan-500/20">
+                    6
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-400">
+                    Ketiga aturan membentuk pohon dengan{" "}
+                    <span className="text-white font-semibold">
+                      3 leaf node
+                    </span>{" "}
+                    dan akurasi klasifikasi yang optimal.
+                  </p>
+                </div>
+              </div>
+
+              <p className="text-center text-gray-600 text-xs mt-5">
+                Model Decision Tree · Gini Impurity · Klasifikasi 3 Kelas
+              </p>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
