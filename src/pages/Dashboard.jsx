@@ -459,7 +459,6 @@ export default function Dashboard() {
                 ) : (
                   <tr>
                     <td colSpan="7" className="py-16 text-center text-gray-500">
-                      <div className="text-4xl mb-3">😭</div>
                       Tidak ada data untuk cluster ini
                     </td>
                   </tr>
